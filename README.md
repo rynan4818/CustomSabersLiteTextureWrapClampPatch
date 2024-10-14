@@ -1,2 +1,2 @@
 # CustomSabersLiteTextureWrapClampPatch
-CustomSabersLiteでトレイルのTextureWrapModeを強制的にClampするパッチ
+A patch that forcibly sets the TextureWrapMode of CustomTrail for CustomSabersLite to Clamp.
