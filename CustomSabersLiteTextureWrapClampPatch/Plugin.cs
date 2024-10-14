@@ -32,10 +32,7 @@ namespace CustomSabersLiteTextureWrapClampPatch
             Configuration.PluginConfig.Instance = conf.Generated<Configuration.PluginConfig>();
             Log.Debug("Config loaded");
 
-            //使用するZenjectのインストーラーのコメントを外します
-            //zenjector.Install<CustomSabersLiteTextureWrapClampPatchAppInstaller>(Location.App);
             zenjector.Install<CustomSabersLiteTextureWrapClampPatchMenuInstaller>(Location.Menu);
-            //zenjector.Install<CustomSabersLiteTextureWrapClampPatchPlayerInstaller>(Location.Player);
         }
 
         [OnStart]

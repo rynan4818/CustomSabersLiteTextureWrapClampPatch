@@ -129,7 +129,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HarmonyPatches\TrailFactory_CreateTrailPatch.cs" />
+    <Compile Include="HarmonyPatches\LiteSaberModelController_PreInitPatch.cs" />
     <Compile Include="Installers\CustomSabersLiteTextureWrapClampPatchMenuInstaller.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfig.cs" />
