@@ -1,15 +1,11 @@
-﻿//using CustomSabersLiteTextureWrapClampPatch.Installers;
+﻿using CustomSabersLiteTextureWrapClampPatch.Installers;
 using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
 using SiraUtil.Zenject;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using HarmonyLib;
 using IPALogger = IPA.Logging.Logger;
+using System.Reflection;
 
 namespace CustomSabersLiteTextureWrapClampPatch
 {
@@ -18,7 +14,8 @@ namespace CustomSabersLiteTextureWrapClampPatch
     {
         internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
-
+        public const string HARMONY_ID = "com.github.rynan4818.CustomSabersLiteTextureWrapClampPatch";
+        private static Harmony _harmony;
         [Init]
         /// <summary>
         /// IPAによってプラグインが最初にロードされたときに呼び出される（ゲームが開始されたとき、またはプラグインが無効な状態で開始された場合は有効化されたときのいずれか）
@@ -32,12 +29,12 @@ namespace CustomSabersLiteTextureWrapClampPatch
             Log.Info("CustomSabersLiteTextureWrapClampPatch initialized.");
 
             //BSIPAのConfigを使用する場合はコメントを外します
-            //Configuration.PluginConfig.Instance = conf.Generated<Configuration.PluginConfig>();
-            //Log.Debug("Config loaded");
+            Configuration.PluginConfig.Instance = conf.Generated<Configuration.PluginConfig>();
+            Log.Debug("Config loaded");
 
             //使用するZenjectのインストーラーのコメントを外します
             //zenjector.Install<CustomSabersLiteTextureWrapClampPatchAppInstaller>(Location.App);
-            //zenjector.Install<CustomSabersLiteTextureWrapClampPatchMenuInstaller>(Location.Menu);
+            zenjector.Install<CustomSabersLiteTextureWrapClampPatchMenuInstaller>(Location.Menu);
             //zenjector.Install<CustomSabersLiteTextureWrapClampPatchPlayerInstaller>(Location.Player);
         }
 
@@ -45,14 +42,15 @@ namespace CustomSabersLiteTextureWrapClampPatch
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-
+            _harmony = new Harmony(HARMONY_ID);
+            _harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         [OnExit]
         public void OnApplicationQuit()
         {
             Log.Debug("OnApplicationQuit");
-
+            _harmony.UnpatchSelf();
         }
     }
 }

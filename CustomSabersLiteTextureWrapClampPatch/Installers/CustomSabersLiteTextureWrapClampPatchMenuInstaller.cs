@@ -1,5 +1,4 @@
-﻿/*
-//using CustomSabersLiteTextureWrapClampPatch.Views;
+﻿using CustomSabersLiteTextureWrapClampPatch.Views;
 using Zenject;
 
 namespace CustomSabersLiteTextureWrapClampPatch.Installers
@@ -8,9 +7,7 @@ namespace CustomSabersLiteTextureWrapClampPatch.Installers
     {
         public override void InstallBindings()
         {
-            //this.Container.BindInterfacesAndSelfTo<SettingTabViewController>().FromNewComponentAsViewController().AsSingle().NonLazy();
-            //this.Container.BindInterfacesAndSelfTo<ConfigViewController>().FromNewComponentAsViewController().AsSingle().NonLazy();
+            this.Container.BindInterfacesAndSelfTo<ConfigViewController>().AsSingle().NonLazy();
         }
     }
 }
-*/
